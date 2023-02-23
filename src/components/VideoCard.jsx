@@ -3,7 +3,7 @@ const VideoCard = ({ info }) => {
   const {medium} = info.snippet.thumbnails;
 
   return (
-    <li key={info.id}>
+    <li key={info.id} className='p-2 overflow-x-hidden'>
       <img src={medium.url} alt={title} />
       <p>{title}</p>
       <p>{channelTitle}</p>

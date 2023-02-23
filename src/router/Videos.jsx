@@ -1,24 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import VideoCard from '../components/VideoCard';
+import axios from 'axios';
 
 const Videos = () => {
-  const videos = useQuery(['videos'], () => {
-      return axios
-      .get('/video/popular.json')
-      .then(data => {
-        console.log(data);
-        return data;
-      })
-      .catch(err => console.log(err));
-    }
+  const {data: videos} = useQuery(
+    ['videos'], async () => 
+      axios
+      .get('/videos/popular.json')
+      .then(data => data.data.items)
   );
 
   console.log(videos);
-   
+
   return (
-    <ul>
-      {videos.map(video => {
+    <ul className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
+      {videos?.map(video => {
         return (
           <VideoCard key={video.id} info={video} />
         )
